@@ -37,3 +37,19 @@ p {
   text-align: left;
   margin: 1rem;
 }
+#search {
+  width: 15rem;
+  margin-left: 4rem;
+  margin-top: 1rem;
+  border: 3px solid rgba(59, 59, 59, 0.123);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.display-number-of-episodes {
+  width: fit-content;
+  margin-top: 1rem;
+}
+#navbar {
+  display: flex;
+  column-gap: 2rem;
+}

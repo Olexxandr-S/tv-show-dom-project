@@ -1,4 +1,12 @@
 //You can edit ALL of the code here
+const rootElem = document.getElementById("root");
+const search = document.querySelector("#search");
+const numOfEpisodes = document.querySelector(".display-number-of-episodes");
+
+let searchValue = "";
+
+search.addEventListener("keydown", OnSearch);
+
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
@@ -9,8 +17,6 @@ function formatNumber(number) {
 }
 
 function makePageForEpisodes(episodeList) {
-  const rootElem = document.getElementById("root");
-
   for (let e of episodeList) {
     const episode = document.createElement("div");
     episode.className = "episode";
@@ -33,6 +39,21 @@ function makePageForEpisodes(episodeList) {
     episode.appendChild(summary);
     rootElem.appendChild(episode);
   }
+}
+
+function OnSearch() {
+  const allEpisodes = getAllEpisodes();
+  searchValue = event.target.value.toLowerCase();
+  let searchedEpisodes = allEpisodes.filter(
+    (episode) =>
+      episode.name.toLowerCase().includes(searchValue) ||
+      episode.summary.toLowerCase().includes(searchValue)
+  );
+  rootElem.innerHTML = "";
+
+  makePageForEpisodes(searchedEpisodes);
+
+  numOfEpisodes.innerHTML = `Displaying ${searchedEpisodes.length}/ ${allEpisodes.length}episodes`;
 }
 
 window.onload = setup;
