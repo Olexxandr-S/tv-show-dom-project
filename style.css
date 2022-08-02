@@ -39,7 +39,7 @@ p {
 }
 #search {
   width: 15rem;
-  margin-left: 4rem;
+  margin-left: 2rem;
   margin-top: 1rem;
   border: 3px solid rgba(59, 59, 59, 0.123);
   border-radius: 5px;
@@ -52,4 +52,9 @@ p {
 #navbar {
   display: flex;
   column-gap: 2rem;
+}
+#select {
+  margin-left: 4rem;
+  margin-top: 1rem;
+  width: fit-content;
 }
