@@ -9,8 +9,16 @@
   </head>
 
   <body>
-    <div id="root">
-    </div>
+
+    <nav id="navbar">
+      <select required="required" id="select">
+        <option value="all">Show all episodes</option>
+      </select>
+      <input type="text" id="search" placeholder="Search" />
+      <p class="display-number-of-episodes"></p>
+    </nav>
+
+    <div id="root"></div>
 
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
