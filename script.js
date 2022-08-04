@@ -14,6 +14,10 @@ function setup() {
   makePageForEpisodes(allEpisodes);
 }
 
+function formatNumber(number) {
+  return number >= 10 ? number : `0${number}`;
+}
+
 function makePageForEpisodes(episodeList) {
 
   allEpisodesList = episodeList;
