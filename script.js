@@ -3,14 +3,21 @@ const rootElem = document.getElementById("root");
 const search = document.getElementById("search");
 const numOfEpisodes = document.querySelector(".display-number-of-episodes");
 const select = document.getElementById("select");
-let allEpisodesList = [];
+let allEpisodesList = "";
 
 let searchValue = "";
 
-search.addEventListener("keydown", OnSearch);
+search.addEventListener("keyup", OnSearch);
+
+fetch("https://api.tvmaze.com/shows/5/episodes")
+  .then((response) => response.json())
+  .then((response) => {
+    allEpisodesList = response;
+  })
+  .catch((err) => console.error(err));
 
 function setup() {
-  const allEpisodes = getAllEpisodes();
+  const allEpisodes = allEpisodesList;
   makePageForEpisodes(allEpisodes);
 }
 
@@ -19,7 +26,6 @@ function formatNumber(number) {
 }
 
 function makePageForEpisodes(episodeList) {
-  allEpisodesList = episodeList;
   for (let e of episodeList) {
     const episode = document.createElement("div");
     episode.className = "episode";
@@ -51,7 +57,7 @@ function makePageForEpisodes(episodeList) {
 }
 
 function OnSearch(event) {
-  const allEpisodes = getAllEpisodes();
+  const allEpisodes = [...allEpisodesList];
   searchValue = event.target.value.toLowerCase();
   let searchedEpisodes = allEpisodes.filter(
     (episode) =>
