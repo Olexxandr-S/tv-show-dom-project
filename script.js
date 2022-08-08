@@ -19,7 +19,6 @@ function formatNumber(number) {
 }
 
 function makePageForEpisodes(episodeList) {
-
   allEpisodesList = episodeList;
   for (let e of episodeList) {
     const episode = document.createElement("div");
