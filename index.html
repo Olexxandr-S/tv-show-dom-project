@@ -10,19 +10,18 @@
 
   <body>
     <nav id="navbar">
-      <select required="required" id="select">
-        <option value="all">Show all episodes</option>
+      <select name="shows" required="required" id="selectShow">
+        <option value="all">Choose a random show</option>
       </select>
+
+      <select name="episodes" required="required" id="selectEpisode"></select>
+
       <input type="text" id="search" placeholder="Search" />
       <p class="display-number-of-episodes"></p>
     </nav>
 
     <div id="root"></div>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
-
-    <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
 </html>

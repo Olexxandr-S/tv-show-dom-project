@@ -2,24 +2,70 @@
 const rootElem = document.getElementById("root");
 const search = document.getElementById("search");
 const numOfEpisodes = document.querySelector(".display-number-of-episodes");
-const select = document.getElementById("select");
-let allEpisodesList = [];
-
+const selectEpisode = document.getElementById("selectEpisode");
+let allEpisodesList = "";
 let searchValue = "";
+let allShows = "";
+let sorted = [];
+let result;
 
-search.addEventListener("keydown", OnSearch);
+fetch("https://api.tvmaze.com/shows")
+  .then((response) => response.json())
+  .then((response) => {
+    allShows = response;
+  })
+  .catch((err) => console.error(err));
+
+fetch("https://api.tvmaze.com/shows/82/episodes")
+  .then((response) => response.json())
+  .then((response) => {
+    allEpisodesList = response;
+  })
+  .catch((err) => console.error(err));
 
 function setup() {
-  const allEpisodes = getAllEpisodes();
-  makePageForEpisodes(allEpisodes);
+  makePageForEpisodes(allEpisodesList);
+  dropdownMenuShows(allShows);
 }
 
 function formatNumber(number) {
   return number >= 10 ? number : `0${number}`;
 }
 
+function randomNum(max) {
+  return Math.floor(Math.random() * max);
+}
+
+search.addEventListener("keyup", OnSearch);
+
+const selectShow = document.getElementById("selectShow");
+
+function dropdownMenuShows(showList) {
+  showList.forEach((show) => {
+    let names = `${show.name}`;
+    sorted.push(names);
+  });
+  let sortedArr = sorted.sort();
+  result = sortedArr.forEach((showName) => {
+    const option = document.createElement("option");
+    option.text = `${showName}`;
+    let showId = 0;
+    showList.forEach((show) => {
+      if (show.name == showName) showId = show.id;
+    });
+    option.setAttribute("value", `${showId}`);
+    selectShow.appendChild(option);
+  });
+}
+
 function makePageForEpisodes(episodeList) {
-  allEpisodesList = episodeList;
+  rootElem.replaceChildren([]);
+  selectEpisode.replaceChildren([]);
+  const allOption = document.createElement("option");
+  allOption.text = "Show all episodes";
+  allOption.setAttribute("value", "all");
+  selectEpisode.appendChild(allOption);
+
   for (let e of episodeList) {
     const episode = document.createElement("div");
     episode.className = "episode";
@@ -46,12 +92,12 @@ function makePageForEpisodes(episodeList) {
     option.text =
       `S${formatNumber(e.season)}E${formatNumber(e.number)}` + ` - ${e.name}`;
     option.setAttribute("value", `${e.season} ${e.number}`);
-    select.appendChild(option);
+    selectEpisode.appendChild(option);
   }
 }
 
 function OnSearch(event) {
-  const allEpisodes = getAllEpisodes();
+  const allEpisodes = [...allEpisodesList];
   searchValue = event.target.value.toLowerCase();
   let searchedEpisodes = allEpisodes.filter(
     (episode) =>
@@ -65,7 +111,7 @@ function OnSearch(event) {
   numOfEpisodes.innerHTML = `Displaying ${searchedEpisodes.length}/ ${allEpisodes.length}episodes`;
 }
 
-select.addEventListener("change", (event) => {
+selectEpisode.addEventListener("change", (event) => {
   rootElem.replaceChildren([]);
   let currentEpisode = `${event.target.value}`;
 
@@ -96,6 +142,33 @@ select.addEventListener("change", (event) => {
       rootElem.appendChild(episode);
     }
   }
+});
+
+const makePageForNewEpisodes = async (id) => {
+  id == "all"
+    ? await fetch(
+        `https://api.tvmaze.com/shows/${randomNum(
+          allEpisodesList.length
+        )}/episodes`
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          makePageForEpisodes(response);
+          allEpisodesList = response;
+        })
+        .catch((err) => console.error(err))
+    : await fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
+        .then((response) => response.json())
+        .then((response) => {
+          makePageForEpisodes(response);
+          allEpisodesList = response;
+        })
+        .catch((err) => console.error(err));
+};
+
+selectShow.addEventListener("change", (event) => {
+  let currentShow = `${event.target.value}`;
+  makePageForNewEpisodes(currentShow);
 });
 
 window.onload = setup;
