@@ -3,22 +3,23 @@ body {
   padding: 0;
   display: grid;
   place-content: center;
-  background: #f2f1f3;
+  background: rgb(211, 211, 211);
 }
 p {
   margin: 0;
 }
 
 ::-webkit-scrollbar {
-  width: 20px;
+  width: 1rem;
 }
 
 ::-webkit-scrollbar-track {
-  background: darkseagreen;
+  background: rgb(211, 211, 211);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: gray;
+  background: rgb(211, 211, 211);
+  border: 0.2rem solid gray;
   border-radius: 1rem;
 }
 
@@ -59,10 +60,11 @@ p {
   position: sticky;
   top: 0;
   width: 100%;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 #search {
   width: 15rem;
-  margin-left: 2rem;
+  margin-left: 0.7rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 3px solid rgba(59, 59, 59, 0.123);
@@ -72,7 +74,7 @@ p {
 }
 
 #selectEpisode {
-  margin-left: 2rem;
+  margin-left: 0.7rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
   width: fit-content;
@@ -81,7 +83,7 @@ p {
   cursor: pointer;
 }
 #selectShow {
-  margin-left: 4rem;
+  margin-left: 0.7rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
   width: fit-content;
@@ -91,5 +93,51 @@ p {
 }
 .display-number-of-episodes {
   width: fit-content;
+  margin-left: 0.7rem;
+  margin-top: 1.1rem;
+  margin-bottom: 1rem;
+}
+.tv-span {
   margin-top: 1rem;
+  margin-left: 3rem;
+  width: 7rem;
+  background: rgb(211, 211, 211);
+  color: rgb(24, 24, 24);
+  font-size: 2rem;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  border: 0.2rem solid gray;
+  border-bottom-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+}
+
+/* Shows */
+
+.showCard {
+  background: white;
+  border: 4px solid gray;
+  border-radius: 1rem;
+}
+#showCardName {
+  border: 2px solid darkgray;
+  border-radius: 1rem 0 1rem;
+  text-transform: capitalize;
+  font-size: 35px;
+  text-align: center;
+  margin: 1rem;
+  cursor: pointer;
+}
+.info > p {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+.content-container {
+  padding: 1rem;
+}
+.info a {
+  text-decoration: none;
+  color: rgb(48, 48, 48);
+  font-family: sans-serif;
+  font-weight: bold;
 }
