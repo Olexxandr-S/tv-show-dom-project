@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TV Show Project</title>
     <link href="style.css" rel="stylesheet" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
     <nav id="navbar">
+      <span class="tv-span" onclick="Refresh()">TV</span>
+
       <select name="shows" required="required" id="selectShow">
-        <option value="all">Choose a random show</option>
+        <option value="" disabled hidden selected>Select a show</option>
+        <option value="random">Choose a random show</option>
       </select>
 
-      <select name="episodes" required="required" id="selectEpisode"></select>
+      <select name="episodes" required="required" id="selectEpisode">
+        <option value="" disabled hidden selected>Select an episode</option>
+      </select>
 
       <input type="text" id="search" placeholder="Search" />
       <p class="display-number-of-episodes"></p>
