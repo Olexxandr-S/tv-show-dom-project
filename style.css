@@ -141,3 +141,81 @@ p {
   font-family: sans-serif;
   font-weight: bold;
 }
+
+#preloader {
+  background: rgb(211, 211, 211) url(./preloader.gif) no-repeat center center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+}
+
+@media screen and (max-width: 1098px) {
+  #navbar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background: darkseagreen;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-height: 13rem;
+  }
+  .display-number-of-episodes {
+    margin-left: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  #search {
+    margin-left: 3rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+  #selectEpisode {
+    order: 1;
+    margin-left: 0rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  #selectShow {
+    order: 1;
+    margin-left: 0rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .tv-span {
+    margin-top: 1rem;
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 948px) {
+  #root {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    column-gap: 3rem;
+    row-gap: 2rem;
+    padding: 3rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #navbar {
+    flex-wrap: nowrap;
+    max-height: fit-content;
+  }
+  #selectEpisode {
+    order: 0;
+    margin-left: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  #selectShow {
+    order: 0;
+    margin-left: 3rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+  }
+}

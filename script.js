@@ -1,3 +1,4 @@
+const loader = document.getElementById("preloader");
 const rootElem = document.getElementById("root");
 const search = document.getElementById("search");
 const numOfEpisodes = document.querySelector(".display-number-of-episodes");
@@ -12,16 +13,10 @@ if (allEpisodesList.length == 0) {
   selectEpisode.setAttribute("disabled", "");
 }
 
-fetch("https://api.tvmaze.com/shows")
-  .then((response) => response.json())
-  .then((response) => {
-    allShows = response;
-  })
-  .catch((err) => console.error(err));
-
 function setup() {
   makePageForShows(allShows);
   dropdownMenuShows(allShows);
+  loader.style.display = "none";
 }
 
 function Refresh() {
@@ -261,4 +256,10 @@ function makePageForShows(showList) {
   });
 }
 
-window.onload = setup;
+fetch("https://api.tvmaze.com/shows")
+  .then((response) => response.json())
+  .then((response) => {
+    allShows = response;
+    setup();
+  })
+  .catch((err) => console.error(err));
